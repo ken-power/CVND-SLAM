@@ -141,6 +141,18 @@ class LandmarksTests(unittest.TestCase):
             self.assertTrue(landmark[0] <= self.r.world_size)
             self.assertTrue(landmark[1] <= self.r.world_size)
 
+    def test_create_5_landmarks(self):
+        # create any number of landmarks
+        num_landmarks = 5
+        self.r.make_landmarks(num_landmarks)
+
+        self.assertEqual(num_landmarks, len(self.r.landmarks))
+
+        # The landmarks are generated in random locations, so we can make sure they are at least within the world grid
+        for landmark in self.r.landmarks:
+            self.assertTrue(landmark[0] <= self.r.world_size)
+            self.assertTrue(landmark[1] <= self.r.world_size)
+
 
 if __name__ == '__main__':
     unittest.main()
