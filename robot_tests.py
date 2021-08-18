@@ -106,5 +106,41 @@ class RobotMovementTests(unittest.TestCase):
         self.assertAlmostEquals(expected_x, self.r.x, delta=self.noise_threshold)
         self.assertAlmostEquals(expected_y, self.r.y, delta=self.noise_threshold)
 
+
+class LandmarksTests(unittest.TestCase):
+    """
+    Tests for creating landmarks, which are measurable features in the map. You can think of landmarks as things like
+    notable buildings, or something smaller such as a tree, rock, or other feature.
+
+    The robot class has a function `make_landmarks` which randomly generates locations for the number of specified
+    landmarks.  We have to pass these locations as a third argument to the `display_world` function and the list of landmark locations is accessed similar to how we find the robot position `r.landmarks`.
+
+    Each landmark has an `[x, y]` locations.
+    """
+
+    def setUp(self) -> None:
+        world_size = 10.0  # size of world (square)
+        measurement_range = 5.0  # range at which we can sense landmarks
+        motion_noise = 0.2  # noise in robot motion
+        measurement_noise = 0.2  # noise in the measurements
+
+        self.noise_threshold = 2.0  # measurement noise can be between -1.0 and 1.0
+
+        # instantiate a robot, r
+        self.r = robot(world_size, measurement_range, motion_noise, measurement_noise)
+
+    def test_create_3_landmarks(self):
+        # create any number of landmarks
+        num_landmarks = 3
+        self.r.make_landmarks(num_landmarks)
+
+        self.assertEqual(num_landmarks, len(self.r.landmarks))
+
+        # The landmarks are generated in random locations, so we can make sure they are at least within the world grid
+        for landmark in self.r.landmarks:
+            self.assertTrue(landmark[0] <= self.r.world_size)
+            self.assertTrue(landmark[1] <= self.r.world_size)
+
+
 if __name__ == '__main__':
     unittest.main()
