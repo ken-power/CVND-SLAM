@@ -10,3 +10,14 @@ Below is an example of a 2D robot world with landmarks (purple x's) and the robo
 
 ![](images/robot_world.png)
 
+# Project Files
+The project consists of three Python notebooks amd and one python file.
+
+* **Notebook 1**: [Robot Moving and Sensing](1.%20Robot%20Moving%20and%20Sensing.ipynb)
+* **Notebook 2**: [Omega and Xi, Constraints](2.%20Omega%20and%20Xi,%20Constraints.ipynb)
+* **Notebook 3**: [Landmark Detection and Tracking](3.%20Landmark%20Detection%20and%20Tracking.ipynb)
+* **Python file**: [robot_class.py](robot_class.py)
+
+The first two notebooks are for exploration of the code, and include a review of SLAM architectures.
+Notebook 3 and the `robot_class.py` file contain the project code that implements landmark detection and tracking using SLAM.
+
