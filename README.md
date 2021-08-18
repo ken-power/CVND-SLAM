@@ -11,7 +11,7 @@ Below is an example of a 2D robot world with landmarks (purple x's) and the robo
 ![](images/robot_world.png)
 
 # Project Files
-The project consists of three Python notebooks amd and one python file.
+The project consists of three Python notebooks and one python file.
 
 * **Notebook 1**: [Robot Moving and Sensing](1.%20Robot%20Moving%20and%20Sensing.ipynb)
 * **Notebook 2**: [Omega and Xi, Constraints](2.%20Omega%20and%20Xi,%20Constraints.ipynb)
