@@ -27,8 +27,8 @@ class RobotInitializations(unittest.TestCase):
         r = robot(world_size, measurement_range, motion_noise, measurement_noise)
 
         # check the location of r
-        self.assertEquals(5.0, r.x)
-        self.assertEquals(5.0, r.y)
+        self.assertEqual(5.0, r.x)
+        self.assertEqual(5.0, r.y)
 
     def test_initial_location_of_robot_world_size_20(self):
         """
@@ -45,8 +45,8 @@ class RobotInitializations(unittest.TestCase):
         r = robot(world_size, measurement_range, motion_noise, measurement_noise)
 
         # check the location of r
-        self.assertEquals(10.0, r.x)
-        self.assertEquals(10.0, r.y)
+        self.assertEqual(10.0, r.x)
+        self.assertEqual(10.0, r.y)
 
     def test_initial_location_of_robot_is_center_of_world(self):
         """
@@ -59,8 +59,8 @@ class RobotInitializations(unittest.TestCase):
             r = robot(world_size=size)
 
             # check the location of r
-            self.assertEquals(size / 2, r.x)
-            self.assertEquals(size / 2, r.y)
+            self.assertEqual(size / 2, r.x)
+            self.assertEqual(size / 2, r.y)
 
 
 class RobotMovementTests(unittest.TestCase):
@@ -88,8 +88,8 @@ class RobotMovementTests(unittest.TestCase):
 
         # print out the exact location
         self.assertTrue(is_moved)
-        self.assertAlmostEquals(expected_x, self.r.x, delta=self.noise_threshold)
-        self.assertAlmostEquals(expected_y, self.r.y, delta=self.noise_threshold)
+        self.assertAlmostEqual(expected_x, self.r.x, delta=self.noise_threshold)
+        self.assertAlmostEqual(expected_y, self.r.y, delta=self.noise_threshold)
 
     def test_move_robot_x4_y_neg2(self):
         # choose values of dx and dy (negative works, too)
@@ -103,8 +103,8 @@ class RobotMovementTests(unittest.TestCase):
 
         # print out the exact location
         self.assertTrue(is_moved)
-        self.assertAlmostEquals(expected_x, self.r.x, delta=self.noise_threshold)
-        self.assertAlmostEquals(expected_y, self.r.y, delta=self.noise_threshold)
+        self.assertAlmostEqual(expected_x, self.r.x, delta=self.noise_threshold)
+        self.assertAlmostEqual(expected_y, self.r.y, delta=self.noise_threshold)
 
 
 class LandmarksTests(unittest.TestCase):
