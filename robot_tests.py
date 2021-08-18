@@ -154,5 +154,44 @@ class LandmarksTests(unittest.TestCase):
             self.assertTrue(landmark[1] <= self.r.world_size)
 
 
+class RobotSenseTests(unittest.TestCase):
+    """
+    Once we have some landmarks to sense, we need to be able to tell our robot to try to sense how far
+    they are away from those landmarks.
+
+    The measurements have the format, `[i, dx, dy]` where `i` is the landmark index (0, 1, 2, ...) and `dx` and `dy`
+    are the measured distance between the robot's location (x, y) and the landmark's location (x, y). This distance
+    will not be perfect since our sense function has some associated `measurement noise`.
+
+    In these tests, we have a given our robot a range of `measurement_range` so any landmarks that are within that
+    range of our robot's location, should appear in a list of measurements. Not all landmarks are guaranteed to be
+    in our visibility range, so this list will be variable in length.
+
+    Note: the robot's location is often called the **pose** or `[Pxi, Pyi]` and the landmark locations are often
+    written as `[Lxi, Lyi]`.
+    """
+
+    def setUp(self) -> None:
+        world_size = 10.0  # size of world (square)
+        measurement_range = 5.0  # range at which we can sense landmarks
+        motion_noise = 0.2  # noise in robot motion
+        measurement_noise = 0.2  # noise in the measurements
+
+        self.noise_threshold = 2.0  # measurement noise can be between -1.0 and 1.0
+
+        # instantiate a robot, r
+        self.r = robot(world_size, measurement_range, motion_noise, measurement_noise)
+
+        # create landmarks
+        num_landmarks = 5
+        self.r.make_landmarks(num_landmarks)
+
+    def test_sense_landmarks(self):
+        measurements = self.r.sense()
+
+        self.assertEqual(5, len(self.r.landmarks), "There should be 5 landmarks at random locations")
+        self.assertEqual(5, len(measurements), "There should be 5 measurements; one for each landmark")
+
+
 if __name__ == '__main__':
     unittest.main()
