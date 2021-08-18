@@ -65,17 +65,16 @@ class RobotInitializations(unittest.TestCase):
 
 class RobotMovementTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls) -> None:
+    def setUp(self) -> None:
         world_size = 10.0  # size of world (square)
         measurement_range = 5.0  # range at which we can sense landmarks
         motion_noise = 0.2  # noise in robot motion
         measurement_noise = 0.2  # noise in the measurements
 
-        cls.noise_threshold = 2.0  # measurement noise can be between -1.0 and 1.0
+        self.noise_threshold = 2.0  # measurement noise can be between -1.0 and 1.0
 
         # instantiate a robot, r
-        cls.r = robot(world_size, measurement_range, motion_noise, measurement_noise)
+        self.r = robot(world_size, measurement_range, motion_noise, measurement_noise)
 
     def test_move_robot_x1_y2(self):
         # choose values of dx and dy (negative works, too)
@@ -84,14 +83,28 @@ class RobotMovementTests(unittest.TestCase):
         is_moved = self.r.move(dx, dy)
 
         # Remember, there will be a random noise component to the measurements, so we won't get these exact values
-        expected_x = 6.04867
-        expected_y = 7.00614
+        expected_x = 6.0
+        expected_y = 7.0
 
         # print out the exact location
         self.assertTrue(is_moved)
         self.assertAlmostEquals(expected_x, self.r.x, delta=self.noise_threshold)
         self.assertAlmostEquals(expected_y, self.r.y, delta=self.noise_threshold)
 
+    def test_move_robot_x4_y_neg2(self):
+        # choose values of dx and dy (negative works, too)
+        dx = 4
+        dy = -2
+        is_moved = self.r.move(dx, dy)
+
+        # Remember, there will be a random noise component to the measurements, so we won't get these exact values
+        expected_x = 8.0
+        expected_y = 3.0
+
+        # print out the exact location
+        self.assertTrue(is_moved)
+        self.assertAlmostEquals(expected_x, self.r.x, delta=self.noise_threshold)
+        self.assertAlmostEquals(expected_y, self.r.y, delta=self.noise_threshold)
 
 if __name__ == '__main__':
     unittest.main()
